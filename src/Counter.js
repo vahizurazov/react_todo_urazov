@@ -11,7 +11,7 @@ function Counter(props) {
     return x;
   };
 
-  return <div> {uncheckItem(props)} items left</div>;
+  return <div className="textLeft"> {uncheckItem(props)} items left</div>;
 }
 
 export default Counter;

@@ -4,7 +4,9 @@ function ClearAll(props) {
   const { clearCompleted } = props;
   return (
     <div>
-      <button onClick={clearCompleted}>Clean all</button>
+      <button onClick={clearCompleted} className="btn btn-success">
+        Clear Completed
+      </button>
     </div>
   );
 }

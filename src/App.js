@@ -50,8 +50,12 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Todoshechka</h1>
-        <input type="text" onKeyDown={this.handleSubmit} />
+        <h1 className="h1">Todoshechka</h1>
+        <input
+          type="text"
+          onKeyDown={this.handleSubmit}
+          className="input-group-text"
+        />
         <RenderWorkList
           items={this.state.workList}
           checked={this.checkItem}

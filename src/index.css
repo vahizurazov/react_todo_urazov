@@ -2,9 +2,32 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  text-align: center;
 }
-
+#root {
+  width: 50%;
+  margin: 0 auto;
+}
 input[type='checkbox']:checked + label {
   text-decoration: line-through;
   color: grey;
+}
+.h1 {
+  color: blue;
+}
+.btn {
+  float: right;
+}
+.list-group-item {
+  width: 100%;
+}
+.input-group-text {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.textLeft {
+  float: left;
+}
+.list-group {
+  margin-bottom: 10px;
 }
