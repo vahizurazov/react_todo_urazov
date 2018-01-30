@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 function RenderWorkList(props) {
   let workList = props.items;
+  let onlyCompleted = props.checkOnlyComp;
+  let view = props.view;
+  let nowShow;
+  view === 'all' ? (nowShow = workList) : (nowShow = onlyCompleted);
   return (
     <ul className="list-group">
-      {workList.map((item, i) => {
+      {nowShow.map((item, i) => {
         return (
           <li key={item.id} className="list-group-item">
             <input
@@ -26,4 +31,7 @@ function RenderWorkList(props) {
   );
 }
 
+RenderWorkList.propTypes = {
+  workListArray: PropTypes.array,
+};
 export default RenderWorkList;

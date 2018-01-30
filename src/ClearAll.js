@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 function ClearAll(props) {
-  const { clearCompleted } = props;
+  let { clearCompleted } = props;
   return (
     <div>
       <button onClick={clearCompleted} className="btn btn-success">
@@ -11,4 +12,7 @@ function ClearAll(props) {
   );
 }
 
+ClearAll.propTypes = {
+  clearCompleted: PropTypes.func,
+};
 export default ClearAll;

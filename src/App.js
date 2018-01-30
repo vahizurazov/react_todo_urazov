@@ -3,10 +3,15 @@ import './App.css';
 import RenderWorkList from './RenderWorkList';
 import Counter from './Counter';
 import ClearAll from './ClearAll';
+import OnlyCompleted from './OnlyCompleted';
+import AllTasks from './AllTasks';
+import PropTypes from 'prop-types';
 
 class App extends Component {
   state = {
     workList: [],
+    onlyCompleted: [],
+    view: 'all',
   };
 
   handleSubmit = e => {
@@ -28,9 +33,6 @@ class App extends Component {
         if (el.id === id) {
           el.checked = !el.checked;
         }
-        // if (k === id.i) {
-        //   el.checked ? (el.checked = false) : (el.checked = true);
-        // }
         return el;
       }),
     }));
@@ -47,6 +49,19 @@ class App extends Component {
       workList: prevState.workList.filter(el => !el.checked),
     }));
   };
+  onlyCompleted = () => {
+    this.setState(prevState => ({
+      onlyCompleted: prevState.workList.filter(el => el.checked),
+      view: 'completed',
+    }));
+  };
+
+  allTasks = () => {
+    this.setState(prevState => ({
+      view: 'all',
+    }));
+  };
+
   render() {
     return (
       <div>
@@ -54,16 +69,20 @@ class App extends Component {
         <input
           type="text"
           onKeyDown={this.handleSubmit}
-          className="input-group-text"
+          className="input-group-text form-control"
         />
         <RenderWorkList
           items={this.state.workList}
           checked={this.checkItem}
           deleted={this.deleteItem}
+          checkOnlyComp={this.state.onlyCompleted}
+          view={this.state.view}
         />
         <div>
           <Counter items={this.state.workList} />
           <ClearAll clearCompleted={this.clearCompleted} />
+          <OnlyCompleted onlyCompleted={this.onlyCompleted} />
+          <AllTasks allTasks={this.allTasks} />
         </div>
       </div>
     );
