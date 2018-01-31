@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import RenderWorkList from './RenderWorkList';
-import Counter from './Counter';
-import ClearAll from './ClearAll';
-import OnlyCompleted from './OnlyCompleted';
-import AllTasks from './AllTasks';
+import Footer from './Footer';
 import PropTypes from 'prop-types';
 
 class App extends Component {
@@ -12,6 +9,14 @@ class App extends Component {
     workList: [],
     onlyCompleted: [],
     view: 'all',
+    isAllChecked: () => {
+      if (
+        this.state.workList.filter(el => el.checked).length ===
+        this.state.workList.length
+      ) {
+        return true;
+      } else return false;
+    },
   };
 
   handleSubmit = e => {
@@ -47,6 +52,7 @@ class App extends Component {
   clearCompleted = () => {
     this.setState(prevState => ({
       workList: prevState.workList.filter(el => !el.checked),
+      onlyCompleted: [],
     }));
   };
   onlyCompleted = () => {
@@ -62,9 +68,27 @@ class App extends Component {
     }));
   };
 
+  selectAll = () => {
+    if (this.state.isAllChecked()) {
+      this.setState(prevState => ({
+        workList: prevState.workList.map(el => {
+          el.checked = false;
+          return el;
+        }),
+      }));
+    } else {
+      this.setState(prevState => ({
+        workList: prevState.workList.map(el => {
+          el.checked = true;
+          return el;
+        }),
+      }));
+    }
+  };
+
   render() {
     return (
-      <div>
+      <div className="col-12">
         <h1 className="h1">Todoshechka</h1>
         <input
           type="text"
@@ -78,12 +102,14 @@ class App extends Component {
           checkOnlyComp={this.state.onlyCompleted}
           view={this.state.view}
         />
-        <div>
-          <Counter items={this.state.workList} />
-          <ClearAll clearCompleted={this.clearCompleted} />
-          <OnlyCompleted onlyCompleted={this.onlyCompleted} />
-          <AllTasks allTasks={this.allTasks} />
-        </div>
+        <Footer
+          items={this.state.workList}
+          clearCompleted={this.clearCompleted}
+          onlyCompleted={this.onlyCompleted}
+          allTasks={this.allTasks}
+          selectAll={this.selectAll}
+          isAllChecked={this.state.isAllChecked}
+        />
       </div>
     );
   }

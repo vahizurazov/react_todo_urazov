@@ -5,7 +5,7 @@ function OnlyCompleted(props) {
   let { onlyCompleted } = props;
   return (
     <div>
-      <button onClick={onlyCompleted} className="btn btn-success">
+      <button onClick={onlyCompleted} className="btn btn-secondary">
         Only Completed
       </button>
     </div>

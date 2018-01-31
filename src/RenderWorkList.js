@@ -8,19 +8,26 @@ function RenderWorkList(props) {
   let nowShow;
   view === 'all' ? (nowShow = workList) : (nowShow = onlyCompleted);
   return (
-    <ul className="list-group">
+    <ul className="list-group col-12">
       {nowShow.map((item, i) => {
         return (
-          <li key={item.id} className="list-group-item">
+          <li
+            key={item.id}
+            className="list-group-item col-12 d-flex justify-content-between"
+          >
             <input
               type="checkbox"
+              className="inputCheck col-1"
               id={item.id}
               onClick={() => props.checked(item.id)}
+              checked={item.checked}
             />
-            <label htmlFor={i}>{item.textValue}</label>
+            <label className="col-9" htmlFor={i}>
+              {item.textValue}
+            </label>
             <button
               onClick={() => props.deleted({ i })}
-              className="btn btn-info"
+              className="btn btn-info col-2"
             >
               Delete
             </button>
